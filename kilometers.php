@@ -24,7 +24,7 @@
           <p>
             Stel een vertrekpunt en een bestemming in om de kilometer afstand te bepalen.
           </p>
-            <select id="start" class="selectpicker show-tick" data-live-search="true" title="Vertrekpunt" data-width="100%">
+            <select id="start" class="selectpicker show-tick" data-live-search="true" data-live-search-placeholder="Zoeken..." title="Vertrekpunt" data-width="100%">
               <optgroup label="Uzelf">
                 <?php
                 $pdo = Database::connect();

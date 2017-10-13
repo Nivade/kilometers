@@ -9,61 +9,31 @@ html, body {
   height: 100%;
 }
 
-.kilometer-panel {
+.option-panel {
   position: absolute;
-  padding: 2em;
+  padding: 25px;
   width: 100%;
-  background: transparent;
+  background: white;
   z-index: 1;
 }
-
-
-
-
-
-
-
-
-
-
-#floating-panel {
-  position: absolute;
-  top: 10px;
-  left: 25%;
-  z-index: 5;
-  background-color: #fff;
-  padding: 5px;
-  border: 1px solid #999;
-  text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
-}
-
-.option-panel .card {
-  border: none;
-}
-
-.option-panel .card-header {
-}
-
 .option-panel input {
-  margin: -15px;
+  //margin: -15px;
   border: none;
   background: #8DC26F;
   color: #ffffff;
   width: 100%;
   height: 100%;
 }
+
+.form-control::placeholder {
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.5);
+}
 .option-panel .card-header .bs-placeholder {
   color: #FFFFFF !important;
   font-weight: 400;
   font-size: 14px;
   text-transform: uppercase;
-}
-
-.option-panel .bs-placeholder {
-  color: white !important;
 }
 
 .login-page,
@@ -77,17 +47,6 @@ html, body {
   height: 600px;
   position: absolute;
   z-index: 1;
-}
-
-.option-panel {
-  position: relative;
-  z-index: 1;
-  background: rgba(255, 255, 255, 1);
-  max-width: 360px;
-  margin: 0 auto 0px;
-  padding: 0px !important;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
 .option-panel button {
