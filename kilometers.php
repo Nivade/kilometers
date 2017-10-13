@@ -12,81 +12,81 @@
 <html>
   <head>
     <title>Kilometers</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="css/bootstrap-select.min.css">
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div class="km-page">
-      <div class="option-panel">
-        <form class="option-panel-form">
+    <div class="kilometer-panel-container">
+      <div class="container">
+        <div class="row">
           <h2>Kilometers</h2>
-          <p>
-            Stel een vertrekpunt en een bestemming in om de kilometer afstand te bepalen.
-          </p>
-            <select id="start" class="selectpicker show-tick" data-live-search="true" data-live-search-placeholder="Zoeken..." title="Vertrekpunt" data-width="100%">
-              <optgroup label="Uzelf">
-                <?php
-                $pdo = Database::connect();
-                foreach ($pdo->query($sqlGetCurrentUser) as $row) {
-                  echo '<option data-tokens="Thuis ik home" value="'.$row['postcode'].'">' .Thuis. '</option>';
-                }
-                ?>
-              </optgroup>
-              <optgroup label="Rac">
-                <?php
-                foreach ($pdo->query($sqlGetAllLocations) as $row) {
-                  echo '<option data-tokens="'.$row['display_name'].'" value="'.$row['zip'].'">' .$row['display_name']. '</option>';
-                }
-                ?>
-              </optgroup>
-              <optgroup label="Clienten">
-                <?php
-                foreach ($pdo->query($sqlGetCurrentUserClients) as $row) {
-                  echo '<option data-tokens="'.$row['client'].''.$row['postcode'].'" value="'.$row['postcode'].'">' .$row['client']. '</option>';
-                }
-                ?>
-              </optgroup>
-            </select>
-            <select id="end" class="selectpicker show-tick" data-live-search="true" title="Bestemming" data-width="100%">
-              <optgroup label="Uzelf">
-                <?php
-                $pdo = Database::connect();
-                foreach ($pdo->query($sqlGetCurrentUser) as $row) {
-                  echo '<option data-tokens="Thuis ik home" value="'.$row['postcode'].'">' .Thuis. '</option>';
-                }
-                ?>
-              </optgroup>
-              <optgroup label="Rac">
-                <?php
-                foreach ($pdo->query($sqlGetAllLocations) as $row) {
-                  echo '<option data-tokens="'.$row['display_name'].'" value="'.$row['zip'].'">' .$row['display_name']. '</option>';
-                }
-                ?>
-              </optgroup>
-              <optgroup label="Clienten">
-                <?php
-                foreach ($pdo->query($sqlGetCurrentUserClients) as $row) {
-                  echo '<option data-tokens="'.$row['client'].''.$row['postcode'].'" value="'.$row['postcode'].'">' .$row['client']. '</option>';
-                }
-                ?>
-              </optgroup>
-            </select>
+          <p>Vul je begin en eindbestemming in om de kilometer afstand te berekenen.</p>
+        </div>
+        <div class="row">
+          <select id="start" class="selectpicker col-md-12" data-live-search="true" data-live-search-placeholder="Zoeken..." title="Vertrekpunt">
+            <optgroup label="Uzelf">
+              <?php
+              $pdo = Database::connect();
+              foreach ($pdo->query($sqlGetCurrentUser) as $row) {
+                echo '<option data-tokens="Thuis ik home" value="'.$row['postcode'].'">' .Thuis. '</option>';
+              }
+              ?>
+            </optgroup>
+            <optgroup label="Rac">
+              <?php
+              foreach ($pdo->query($sqlGetAllLocations) as $row) {
+                echo '<option data-tokens="'.$row['display_name'].'" value="'.$row['zip'].'">' .$row['display_name']. '</option>';
+              }
+              ?>
+            </optgroup>
+            <optgroup label="Clienten">
+              <?php
+              foreach ($pdo->query($sqlGetCurrentUserClients) as $row) {
+                echo '<option data-tokens="'.$row['client'].''.$row['postcode'].'" value="'.$row['postcode'].'">' .$row['client']. '</option>';
+              }
+              ?>
+            </optgroup>
+          </select>
+        </div>
+        <div class="row">
+          <select id="end" class="selectpicker col-md-12" data-live-search="true" data-live-search-placeholder="Zoeken..." title="Bestemming">
+            <optgroup label="Uzelf">
+              <?php
+              $pdo = Database::connect();
+              foreach ($pdo->query($sqlGetCurrentUser) as $row) {
+                echo '<option data-tokens="Thuis ik home" value="'.$row['postcode'].'">' .Thuis. '</option>';
+              }
+              ?>
+            </optgroup>
+            <optgroup label="Rac">
+              <?php
+              foreach ($pdo->query($sqlGetAllLocations) as $row) {
+                echo '<option data-tokens="'.$row['display_name'].'" value="'.$row['zip'].'">' .$row['display_name']. '</option>';
+              }
+              ?>
+            </optgroup>
+            <optgroup label="Clienten">
+              <?php
+              foreach ($pdo->query($sqlGetCurrentUserClients) as $row) {
+                echo '<option data-tokens="'.$row['client'].''.$row['postcode'].'" value="'.$row['postcode'].'">' .$row['client']. '</option>';
+              }
+              ?>
+            </optgroup>
+          </select>
+        </div>
+        <div class="row">
+          <div>
+            <p id="kilometers"></p>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div id="map">
 
-            <div class="result">
-              <i id="kilometers"></i>
-            </div>
-        </form>
       </div>
 
-    </div>
-    <div id="map">
-
-    </div>
-
     <script>
-
-
 
       function initMap() {
         var directionsService = new google.maps.DirectionsService;
@@ -127,17 +127,25 @@
       }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZbVzR16KMxrhyRIWrRyzeCk1WL1SH11s&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCe7gCMUs37XQzvUk_jpk7JS6hWXmDyuXU&callback=initMap">
     </script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="js/bootstrap-select.min.js"></script>
 
     <script>
       $(document).ready( function () {
         $('.selectpicker').selectpicker();
       });
+
+      $('#start').on('show.bs.select', function (e) {
+        $('.dropdown-menu .inner').css('max-height', $('.dropdown-menu .inner').height() + 300);
+      });
+      $('#end').on('show.bs.select', function (e) {
+        $('.dropdown-menu .inner').css('max-height', $('.dropdown-menu .inner').height() + 300);
+      });
+
     </script>
   </body>
 </html>
